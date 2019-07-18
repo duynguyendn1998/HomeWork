@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Number guessing game in HTML</title>
+	<style>
+	#message{
+	font-size :20px;
+	text-align: center;
+	margin-top: 100px;
+	}
+	</style>
+</head>
+<body>
+	
+	<div id="message"	style="display: ">You can guess a number form 0 to 100</div>
+
+	<input style="margin-left:550px; margin-top: 20px" type="Number" id="fnumber" >
+
+	<button id="guessButton">Guess</button>
+	<div style="text-align: center; margin-top: 20px" id="numberChoose"></div>
+
+</body>
+<script>
+	let result = Math.floor(Math.random() * 101);
+	let button =document.getElementById("guessButton");
+	let numberChoose="";
+	let cout=9;
+	let max=100;
+	let min=0;
+	button.addEventListener('click',function()
+	{
+		let userGuess =document.getElementById("fnumber").value;
+
+		if (cout==0)
+		{
+			alert("Gameover!!!");
+			location.reload();
+		}
+		if(userGuess < result)
+		{
+			document.getElementById('message').innerHTML="Sorry your guess is too low.You have "+cout+" guess left";
+			document.getElementById('message').style.backgroundColor="#f03434";
+			cout--;
+			min=userGuess;
+		}
+		else if(userGuess > result)
+		{
+			document.getElementById('message').innerHTML="Sorry your guess is too high.You have "+cout+" guess left";
+			document.getElementById('message').style.backgroundColor="#f22613";
+			cout--;
+			max=userGuess;
+		}
+		else if(userGuess == result)
+		{
+			document.getElementById('message').innerHTML="Congratulations!! You guessed correctly!!";
+			document.getElementById('message').style.backgroundColor="#00e640";
+			setTimeout(function(){ location.reload();},5000);
+		}
+		numberChoose += "You was choice: "+userGuess+". Result: form  "+min+"  to  "+max+"<br>";
+		document.getElementById("numberChoose").innerHTML = numberChoose;
+
+	});
+</script>
+</html>
